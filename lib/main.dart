@@ -1,6 +1,6 @@
-import 'package:coffee_shop_ui/screens/get_started.dart';
-import 'package:coffee_shop_ui/screens/home_screen.dart';
-import 'package:coffee_shop_ui/screens/product_details.dart';
+import 'package:coffee_shop/screens/get_started.dart';
+import 'package:coffee_shop/screens/home_screen.dart';
+import 'package:coffee_shop/screens/product_details.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -20,9 +20,9 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => GetStartedScreen(),
+        '/': (context) => const GetStartedScreen(),
         '/home': (context) => const HomeScreen(),
-        '/recipes': (context) => const ProductDetailsScreen(),
+        '/recipes': (context) => ProductDetailsScreen(title: 'Product Details'),
       },
     );
   }
