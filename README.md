@@ -1,29 +1,41 @@
-# coffee_shop
+# ☕ Coffee Shop App
 
-A new Flutter project.
+A modern coffee shop application built with Flutter, featuring a responsive design for mobile, tablet, and desktop platforms.
 
-## Getting Started
+## ✨ Features
 
-This project is a starting point for a Flutter application that follows the
-[simple app state management
-tutorial](https://flutter.dev/to/state-management-sample).
+- Browse coffee shops and their menus
+- View detailed coffee recipes and ingredients
+- Responsive UI for all screen sizes
+- Shop ratings and details
+- Modern and clean design
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🚀 Getting Started
 
-## Assets
+1. Clone the repository
+2. Install dependencies:
+```bash
+flutter pub get
+```
+3. Run the app:
+```bash
+flutter run
+```
 
-The `assets` directory houses images, fonts, and any other files you want to
-include with your application.
+## 📱 Screenshots
 
-The `assets/images` directory contains [resolution-aware
-images](https://flutter.dev/to/resolution-aware-images).
+The app uses images from `assets/images/`:
+- coffee.jpg
+- chocolate-mint-cappuccino.jpg
+- cappucino_milk.jpg
+- coffee_getstarted.jpg
 
-## Localization
+## 🛠️ Built With
 
-This project generates localized messages based on arb files found in
-the `lib/src/localization` directory.
+- Flutter
+- Material Design
+- Responsive Layout
 
-To support additional languages, please visit the tutorial on
-[Internationalizing Flutter apps](https://flutter.dev/to/internationalization).
+## 📄 License
+
+This project is licensed under the MIT License.
