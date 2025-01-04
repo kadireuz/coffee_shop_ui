@@ -1,4 +1,4 @@
-# ☕ Coffee Shop App
+# ☕ Coffee Shop App UI 
 
 A modern coffee shop application built with Flutter, featuring a responsive design for mobile, tablet, and desktop platforms.
 
