@@ -1,6 +1,8 @@
 import 'package:coffee_shop/screens/get_started.dart';
 import 'package:coffee_shop/screens/home_screen.dart';
 import 'package:coffee_shop/screens/product_details.dart';
+import 'package:coffee_shop/screens/coffee_shop_details.dart';
+import 'package:coffee_shop/models/coffee_shop.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -22,7 +24,22 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const GetStartedScreen(),
         '/home': (context) => const HomeScreen(),
-        '/recipes': (context) => ProductDetailsScreen(title: 'Product Details'),
+        '/product-details': (context) {
+          final args = ModalRoute.of(context)?.settings.arguments
+              as Map<String, dynamic>;
+          return ProductDetailsScreen(
+            title: args['title'],
+            description: args['description'],
+            image: args['image'],
+            price: args['price'],
+            ingredients: List<String>.from(args['ingredients']),
+            preparation: args['preparation'],
+          );
+        },
+        '/shop-details': (context) {
+          final shop = ModalRoute.of(context)?.settings.arguments as CoffeeShop;
+          return CoffeeShopDetailsScreen(shop: shop);
+        },
       },
     );
   }

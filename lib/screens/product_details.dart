@@ -1,148 +1,148 @@
 import 'package:flutter/material.dart';
+import '../utils/responsive_layout.dart';
 
-class ProductDetailsScreen extends StatefulWidget {
-  const ProductDetailsScreen({super.key, required this.title});
-
+class ProductDetailsScreen extends StatelessWidget {
   final String title;
+  final String description;
+  final String image;
+  final String price;
+  final List<String> ingredients;
+  final String preparation;
 
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
+  const ProductDetailsScreen({
+    super.key,
+    required this.title,
+    required this.description,
+    required this.image,
+    required this.price,
+    required this.ingredients,
+    required this.preparation,
+  });
 
-class _MyHomePageState extends State<ProductDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
+        title: Text(title),
+        backgroundColor: Colors.brown[700],
+        foregroundColor: Colors.white,
       ),
-      body: SingleChildScrollView(
+      body: ResponsiveLayout(
+        mobile: _buildMobileLayout(context),
+        tablet: _buildTabletLayout(context),
+        desktop: _buildDesktopLayout(context),
+      ),
+    );
+  }
+
+  Widget _buildMobileLayout(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Image.asset(
+            image,
+            width: double.infinity,
+            height: 300,
+            fit: BoxFit.cover,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildHeader(context),
+                const SizedBox(height: 24),
+                _buildDescription(context),
+                const SizedBox(height: 24),
+                _buildIngredients(context),
+                const SizedBox(height: 24),
+                _buildPreparation(context),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTabletLayout(BuildContext context) {
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(24.0),
         child: Column(
           children: [
-            // Image Style Section
-            Container(
-              margin: const EdgeInsets.symmetric(vertical: 16.0),
-              child: Image.asset(
-                'assets/images/chocolate-mint-cappuccino.jpg',
-                width: double.infinity,
-                height: 400,
-                fit: BoxFit.fill,
-              ),
+            Image.asset(
+              image,
+              width: double.infinity,
+              height: 400,
+              fit: BoxFit.cover,
             ),
-            // Title and Rating Section
-            const Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
+            const SizedBox(height: 32),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'Espresso Coffee',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(height: 4),
-                      Text(
-                        'with Chocolate',
-                        style: TextStyle(fontSize: 16),
-                      ),
+                      _buildHeader(context),
+                      const SizedBox(height: 24),
+                      _buildDescription(context),
                     ],
                   ),
-                  Row(
+                ),
+                const SizedBox(width: 48),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Icon(Icons.star, color: Colors.amber),
-                      Text('4.5'),
-                      SizedBox(width: 4),
-                      Text('(2,330)'),
+                      _buildIngredients(context),
+                      const SizedBox(height: 24),
+                      _buildPreparation(context),
                     ],
                   ),
-                ],
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDesktopLayout(BuildContext context) {
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(32.0),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              flex: 2,
+              child: Image.asset(
+                image,
+                height: 600,
+                fit: BoxFit.cover,
               ),
             ),
-
-            // Description Section
-            const Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Text(
-                'A cappuccino is an approximately 150 ml (5 oz) beverage, with 25 ml of espresso coffee and 85ml of fresh milk the fo...',
-                style: TextStyle(fontSize: 16),
-              ),
-            ),
-
-            // Size Selection Section
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+            const SizedBox(width: 48),
+            Expanded(
+              flex: 3,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      minimumSize: const Size(
-                          80, 50), // Add this line to set the button width
-                    ),
-                    child: const Text('S'),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      minimumSize: const Size(
-                          80, 50), // Add this line to set the button width
-                    ),
-                    child: const Text('M'),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      minimumSize: const Size(
-                          80, 50), // Add this line to set the button width
-                    ),
-                    child: const Text('L'),
-                  ),
-                ],
-              ),
-            ),
-
-            // Price and Buy Now Section
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    '\$4.53',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 32, vertical: 16),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                    ),
-                    child: const Text('Buy Now'),
+                  _buildHeader(context),
+                  const SizedBox(height: 32),
+                  _buildDescription(context),
+                  const SizedBox(height: 32),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(child: _buildIngredients(context)),
+                      const SizedBox(width: 48),
+                      Expanded(child: _buildPreparation(context)),
+                    ],
                   ),
                 ],
               ),
@@ -150,6 +150,94 @@ class _MyHomePageState extends State<ProductDetailsScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildHeader(BuildContext context) {
+    double titleSize = ResponsiveLayout.isMobile(context) ? 24 : 32;
+    double priceSize = ResponsiveLayout.isMobile(context) ? 20 : 24;
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          title,
+          style: TextStyle(
+            fontSize: titleSize,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Text(
+          price,
+          style: TextStyle(
+            fontSize: priceSize,
+            fontWeight: FontWeight.bold,
+            color: Colors.brown[700],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildDescription(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Açıklama',
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+        const SizedBox(height: 8),
+        Text(
+          description,
+          style: Theme.of(context).textTheme.bodyLarge,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildIngredients(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'İçindekiler',
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+        const SizedBox(height: 8),
+        ...ingredients.map(
+          (ingredient) => Padding(
+            padding: const EdgeInsets.symmetric(vertical: 4),
+            child: Row(
+              children: [
+                const Icon(Icons.circle, size: 8),
+                const SizedBox(width: 8),
+                Text(
+                  ingredient,
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPreparation(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Hazırlanışı',
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+        const SizedBox(height: 8),
+        Text(
+          preparation,
+          style: Theme.of(context).textTheme.bodyLarge,
+        ),
+      ],
     );
   }
 }
